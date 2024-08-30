@@ -1,4 +1,3 @@
-import { IMeasure } from "../models/Measure";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
 
