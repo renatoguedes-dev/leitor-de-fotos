@@ -6,7 +6,7 @@ dotenv.config();
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
 
 class UploadService {
-    async processImage(fileMimeType: string, imageBase64: string) {
+    async processImage(fileMimeType: string, imageBase64: string): Promise<number> {
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
         const result = await model.generateContent([

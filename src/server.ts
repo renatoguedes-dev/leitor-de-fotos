@@ -13,9 +13,11 @@ const server = express();
 server.use(cors());
 
 server.use(express.json());
+
 server.use(express.urlencoded({ extended: false }));
 
 server.use(routes);
+
 server.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
 server.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

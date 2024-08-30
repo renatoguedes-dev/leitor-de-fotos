@@ -64,7 +64,7 @@ class DatabaseService {
         return result.rows[0] || null;
     }
 
-    async checkId(id: string) {
+    async checkId(id: string): Promise<Measurement> {
         const query = `
             SELECT id FROM measurements
             WHERE id = $1
@@ -76,7 +76,7 @@ class DatabaseService {
         return result.rows[0] || null;
     }
 
-    async confirmReadingStatus(id: string) {
+    async confirmReadingStatus(id: string): Promise<Measurement> {
         const query = `
             SELECT value_confirmed FROM measurements
             WHERE id = $1
@@ -89,7 +89,10 @@ class DatabaseService {
         return result.rows[0];
     }
 
-    async updateValueAndStatus(id: string, confirmed_value: number) {
+    async updateValueAndStatus(
+        id: string,
+        confirmed_value: number
+    ): Promise<Measurement> {
         const query = `
             UPDATE measurements
             SET measure_value = $1, value_confirmed = true
@@ -104,7 +107,7 @@ class DatabaseService {
         return result.rows[0];
     }
 
-    async getListByCustomer(customerCode: string) {
+    async getListByCustomer(customerCode: string): Promise<Measurement[]> {
         const query = `
             SELECT * FROM measurements
             WHERE customer_code = $1
@@ -117,7 +120,10 @@ class DatabaseService {
         return result.rows;
     }
 
-    async getListByCustomerAndType(customerCode: string, type: string) {
+    async getListByCustomerAndType(
+        customerCode: string,
+        type: string
+    ): Promise<Measurement[]> {
         const query = `
             SELECT * FROM measurements
             WHERE customer_code = $1
@@ -127,7 +133,7 @@ class DatabaseService {
         const values = [customerCode, type];
 
         const result = await this.pool.query(query, values);
-        
+
         return result.rows;
     }
 }
