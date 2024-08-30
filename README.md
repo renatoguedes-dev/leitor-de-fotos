@@ -3,6 +3,12 @@
 Serviço para gerenciar a leitura individualizada de consumo de água e gás 
 utilizando a IA Gemini.
 
+## Instruções
+- Criar um arquivo '.env' na raiz do projeto e incluir a key do Gemini em GEMINI_API_KEY='chave da API'
+- Usar o comando 'docker-compose up --build' no terminal para criar os containers 
+do servidor e do banco de dados no docker.
+
+
 ### Rotas
 
 #### **POST /upload**
