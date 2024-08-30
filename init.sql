@@ -1,4 +1,4 @@
-CREATE DATABASE projeto_shopper;
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 CREATE TABLE measurements (
   id VARCHAR(50) PRIMARY KEY DEFAULT gen_random_uuid(),

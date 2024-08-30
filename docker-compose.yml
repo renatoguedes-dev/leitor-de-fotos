@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:16.4
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: usr_shopper
+      POSTGRES_PASSWORD: 65CTmigDWuAM42AqG6j6Udu2kj7Hww
+      POSTGRES_DB: shopper_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"  
+
+  nodejs:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile  
+    container_name: nodejs_container
+    environment:
+      DB_USER: usr_shopper        
+      DB_PASSWORD: 65CTmigDWuAM42AqG6j6Udu2kj7Hww
+      DB_NAME: shopper_db         
+      DB_HOST: postgres
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"  
+    volumes:
+      - .:/home/node/projeto-shopper 
+      - ./uploads:/home/node/projeto-shopper/uploads
+      - /home/node/projeto-shopper/node_modules
+
+volumes:
+  postgres_data:

@@ -1,17 +1,19 @@
 FROM node:22-alpine3.19
 
-RUN mkdir -p /projeto-shopper/node_modules && chown -R node:node /projeto-shopper
+RUN mkdir -p /home/node/projeto-shopper/node_modules
 
-WORKDIR /projeto-shopper
+WORKDIR /home/node/projeto-shopper
 
-COPY --chown=node:node package*.json ./
-
-USER node
+COPY package*.json ./
 
 RUN npm install
 
-COPY --chown=node:node . .
+RUN npm install -g typescript
+
+COPY . .
+
+RUN npm run build
 
 EXPOSE 3000
 
-CMD ["node", "index.js"]
+CMD ["node", "dist/server.js"]
