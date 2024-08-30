@@ -27,9 +27,7 @@ services:
     ports:
       - "3000:3000"  
     volumes:
-      - .:/home/node/projeto-shopper 
       - ./uploads:/home/node/projeto-shopper/uploads
-      - /home/node/projeto-shopper/node_modules
 
 volumes:
   postgres_data:
